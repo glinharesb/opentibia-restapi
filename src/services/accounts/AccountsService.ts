@@ -16,7 +16,7 @@ export class AccountsService {
     premium_ends_at,
     email,
     creation,
-  }) {
+  }): Promise<Accounts | Error> {
     try {
       if (await this.accountsRepository.findOne({ name })) {
         throw new Error('account already exists');
@@ -40,7 +40,7 @@ export class AccountsService {
     }
   }
 
-  async findAll() {
+  async findAll(): Promise<Accounts[] | Error> {
     try {
       return await this.accountsRepository.find();
     } catch (error) {

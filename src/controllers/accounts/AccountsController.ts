@@ -13,6 +13,19 @@ export class AccountsController {
     return response.json(result);
   }
 
+  async findById(request: Request, response: Response) {
+    const { id } = request.params;
+
+    const service = new AccountsService();
+    const result = await service.findById(id);
+
+    if (result instanceof Error) {
+      return response.status(400).json({ message: result.message });
+    }
+
+    return response.json(result);
+  }
+
   async findAll(request: Request, response: Response) {
     const service = new AccountsService();
     const result = await service.findAll();

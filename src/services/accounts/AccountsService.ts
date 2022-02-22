@@ -40,9 +40,29 @@ export class AccountsService {
     }
   }
 
+  async findById(id: any): Promise<Accounts | Error> {
+    try {
+      if (isNaN(id)) {
+        throw new Error('param id must be a number');
+      }
+
+      const account = await this.accountsRepository.findOne({ id });
+
+      if (!account) {
+        throw new Error('account does not exists');
+      }
+
+      return account;
+    } catch (error) {
+      return error;
+    }
+  }
+
   async findAll(): Promise<Accounts[] | Error> {
     try {
-      return await this.accountsRepository.find();
+      const accounts = await this.accountsRepository.find();
+
+      return accounts;
     } catch (error) {
       return error;
     }

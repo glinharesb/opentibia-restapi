@@ -5,24 +5,24 @@ export class Accounts {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({ nullable: false, unique: true })
   name: string;
 
-  @Column()
+  @Column({ nullable: false })
   password: string;
 
-  @Column()
+  @Column({ nullable: true })
   secret: string;
 
-  @Column()
+  @Column({ nullable: false, default: 1 })
   type: number;
 
-  @Column()
+  @Column({ nullable: false, default: 0 })
   premium_ends_at: number;
 
-  @Column()
+  @Column({ nullable: false, default: '' })
   email: string;
 
-  @Column()
+  @Column({ nullable: false, default: 0 })
   creation: number;
 }

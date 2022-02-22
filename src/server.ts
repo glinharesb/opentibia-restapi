@@ -1,16 +1,20 @@
 import 'reflect-metadata';
-import express from 'express';
+import express, { json } from 'express';
 
 import { routes } from './routes';
 import { connectToDatabase } from './database';
 
-const app = express();
+async function bootstrap() {
+  await connectToDatabase();
 
-app.use(routes);
+  const app = express();
+  app.use(json());
+  app.use(routes);
 
-connectToDatabase();
+  const PORT = Number(process.env.APP_PORT) || 3000;
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`~> Server listening on: http://localhost:${PORT}`);
+  });
+}
 
-const PORT = Number(process.env.APP_PORT) || 3000;
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`~> Server listening on: http://localhost:${PORT}`);
-});
+bootstrap();

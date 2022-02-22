@@ -1,10 +1,9 @@
 import { Router } from 'express';
+import { AccountsController } from './controllers/accounts/AccountsController';
 
 const routes = Router();
 
-routes.get('/', (request, response) => {
-  response.send('Teste');
-  response.end();
-});
+routes.get('/accounts', new AccountsController().findAll);
+routes.post('/accounts', new AccountsController().create);
 
 export { routes };

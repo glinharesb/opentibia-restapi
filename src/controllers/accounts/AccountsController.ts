@@ -7,7 +7,7 @@ export class AccountsController {
     const result = await service.create(request.body);
 
     if (result instanceof Error) {
-      return response.json({ message: result.message });
+      return response.status(400).json({ message: result.message });
     }
 
     return response.json(result);
@@ -18,7 +18,7 @@ export class AccountsController {
     const result = await service.findAll();
 
     if (result instanceof Error) {
-      return response.json({ message: result.message });
+      return response.status(400).json({ message: result.message });
     }
 
     return response.json(result);
